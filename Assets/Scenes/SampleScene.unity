@@ -910,7 +910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df6448d2b373f6419593273419cf845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProyectilPersonajeScript
-  _bala: {fileID: 6376132483140465571, guid: 9d1f5c49ff342ec41ac01c2ecb633953, type: 3}
+  _bala: {fileID: 6747441995750975810, guid: bda85abded4a81a4fa099c9850500d30, type: 3}
   _controladorDisparo: {fileID: 2133140441}
   _disparo: {fileID: -7471211009204490832, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!1660057539 &9223372036854775807
