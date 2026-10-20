@@ -23,5 +23,9 @@ public class Bala : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 
 }
