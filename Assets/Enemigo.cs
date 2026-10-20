@@ -5,16 +5,14 @@ public class Enemigo : MonoBehaviour
 {
 
     [SerializeField]
-    private float _speed = 0.1f;
+    private float _speed = Random.Range(1.2f,1.8f);
 
     private float _timeMove = 0;
 
-    private float _timeMoveTMP = 0;
+    private float _timeMoveTMP = Random.Range(2f,6f);
 
     [SerializeField]
     private float _vida;
-
-    private Rigidbody2D _rigidbody2D;
 
     public void HacerDaño(float _daño)
     {
@@ -27,35 +25,34 @@ public class Enemigo : MonoBehaviour
 
     void Update()
     {
+        direccio();
         _timeMove += Time.deltaTime;
-        if (_timeMove < _timeMoveTMP && _timeMoveTMP != 0)
+        if (_timeMove >= _timeMoveTMP)
         {
-            direccio();
-        } else {
             direccioNova();
         }
     }
 
     void direccio()
     {
-        _rigidbody2D.linearVelocityX = _speed;
+        
+
+        int opDireccio = (int) Random.Range(1f,3f);
+
+        if(opDireccio == 1)
+        {
+            transform.Translate(Vector2.left*_speed*Time.deltaTime);
+        } else
+        {
+            transform.Translate(Vector2.right*_speed*Time.deltaTime);
+        }
     }
 
     void direccioNova()
     {
         _timeMove -= _timeMoveTMP;
         _timeMoveTMP = Random.Range(2f,6f);
-        float opDireccio = Random.Range(1f,3f);
-
-        float _moviment = Random.Range(0.2f,0.8f);
-
-        if(opDireccio == 1)
-        {
-            _speed = _moviment;
-        } else
-        {
-            _speed = -_moviment;
-        }
+        _speed = Random.Range(1.2f,2.2f);
 
     }
 

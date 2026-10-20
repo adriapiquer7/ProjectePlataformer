@@ -180,3 +180,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _speed: 4
+  _vida: 100
