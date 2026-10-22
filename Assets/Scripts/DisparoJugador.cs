@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ProyectilPersonajeScript : MonoBehaviour
+public class DisparoJugador : MonoBehaviour
 {
     [SerializeField] 
     private GameObject _bala;

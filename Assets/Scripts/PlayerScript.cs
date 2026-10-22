@@ -5,15 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerScript : MonoBehaviour
 {
-    [Header("Vida Player")]
-    /*[SerializeField]
-    private int hp = 10;*/
+    [Header("Stats Player")]
     [SerializeField]
     private float speed = 4f;
     [SerializeField]
     private float jump = 4f;
-    /*[SerializeField]
-    private int municion = 25;*/
     
     [Header("Moviment personalitzat")]
     [SerializeField]
@@ -24,6 +20,7 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private bool _estaAlTerra;
     private bool _mirandoDerecha = true;
+    private Vector2 _direccioPlayer;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -84,9 +81,8 @@ public class PlayerScript : MonoBehaviour
     private void Girar()
     {
         _mirandoDerecha=!_mirandoDerecha;
-        Vector3 escala = transform.localScale;
-        escala.x*=-1;
-        transform.localScale=escala;
-        //transform.eulerAngles = new Vector3(0,transform.eulerAngles.y+180,0);
+        //aixo ho he tret d'un video de youtube, gira el player i els seus components.
+        // ho faig servir per poder disparar on estta mirant el player
+        transform.eulerAngles = new Vector3(0,transform.eulerAngles.y+180,0);
     }
 }
