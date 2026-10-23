@@ -10,6 +10,10 @@ public class DisparoJugador : MonoBehaviour
     [SerializeField] 
     private InputActionReference _disparo;
 
+    /*
+    Aquest script serveix per gestionar els dispars del jugador, recull l'input del boto per disparar,
+    i gestiona amb Instantiate la creacio de bales cada cop que es clica el boto
+    */
     void OnEnable()
     {
         _disparo.action.performed += Disparar;

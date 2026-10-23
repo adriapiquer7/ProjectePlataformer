@@ -18,12 +18,15 @@ public class PlayerScript : MonoBehaviour
     private InputActionReference _Moure;  
 
     private Rigidbody2D _rigidbody2D;
-    private bool _estaAlTerra;
+    private bool _estaAlTerra=true;
     private bool _mirandoDerecha = true;
-    private Vector2 _direccioPlayer;
+    [Header("Animacion")]
+    private Animator _animator;
+    private string _animacioEnPlay = "Idel";
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        //comprovacions per saber si pot saltar o no
         if(collision.gameObject.CompareTag("Suelo"))
         {
             _estaAlTerra = true;
@@ -31,6 +34,7 @@ public class PlayerScript : MonoBehaviour
     }
     void OnCollisionExit2D(Collision2D collision)
     {
+        //comprovacions per saber si pot saltar o no
         if(collision.gameObject.CompareTag("Suelo"))
         {
             _estaAlTerra = false;
@@ -39,37 +43,64 @@ public class PlayerScript : MonoBehaviour
 
     void Awake()
     {
+        //agafem el component animator i rigidbody del player
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = gameObject.GetComponent<Animator>();
     }
 
     void OnEnable()
     {
+        //subscripcio del jump
         _Jump.action.performed += Saltar;
     }
 
     void OnDisable()
     {
+        //desubscripcio del jump
         _Jump.action.performed -= Saltar;
     }
 
 
     private void Saltar(InputAction.CallbackContext context)
     {
+        //input per poder saltar
         if (_estaAlTerra)
         {
             _rigidbody2D.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
         }
     }
+    void Update()
+    {
+        
+    }
 
     private void FixedUpdate()
     {
+        //un update que recull el valor del moure del player, cada update es pasa el valor al moure 
+        //i gestiona el gir
         Vector2 joystick = _Moure.action.ReadValue<Vector2>();
         _rigidbody2D.linearVelocityX = joystick.x * speed;
         Mover(joystick.x);
+        //_animator.SetFloat("Horizontal", Mathf.Abs(joystick.x));
+        if(_animacioEnPlay.Equals("Idel"))
+        {
+            if (joystick.x>0||joystick.x<0)
+            {
+                _animator.Play("Run");
+                _animacioEnPlay="Run";
+            }
+            if (joystick.x == 0)
+            {
+                _animator.Play("Idle");
+                _animacioEnPlay="Idle";
+            }
+        }
     }
 
     private void Mover(float mover)
     {   
+        //aquesta funcio comprova amb les variables que he creat a dalt i les que lo arriben
+        // cap a on mira el player i crida a la funcio girar. 
         if(mover>0 && !_mirandoDerecha){
             Girar();
         }
@@ -80,6 +111,7 @@ public class PlayerScript : MonoBehaviour
     }
     private void Girar()
     {
+        //aquesta funcio gestiona el mirar cap a dreta o esquerra amb els seus components
         _mirandoDerecha=!_mirandoDerecha;
         //aixo ho he tret d'un video de youtube, gira el player i els seus components.
         // ho faig servir per poder disparar on estta mirant el player
