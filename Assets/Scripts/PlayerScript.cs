@@ -7,9 +7,13 @@ public class PlayerScript : MonoBehaviour
 {
     [Header("Stats Player")]
     [SerializeField]
+    private float _hp_max = 100;
+    [SerializeField]
+    private float _hp=100;
+    [SerializeField]
     private float speed = 4f;
     [SerializeField]
-    private float jump = 4f;
+    private float jump = 8f;
     
     [Header("Moviment personalitzat")]
     [SerializeField]
@@ -22,7 +26,6 @@ public class PlayerScript : MonoBehaviour
     private bool _mirandoDerecha = true;
     [Header("Animacion")]
     private Animator _animator;
-    private string _animacioEnPlay = "Idel";
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -30,6 +33,10 @@ public class PlayerScript : MonoBehaviour
         if(collision.gameObject.CompareTag("Suelo"))
         {
             _estaAlTerra = true;
+        }
+        if (collision.gameObject.CompareTag("enemic"))
+        {
+            _animator.Play("Hit");
         }
     }
     void OnCollisionExit2D(Collision2D collision)
@@ -69,10 +76,6 @@ public class PlayerScript : MonoBehaviour
             _rigidbody2D.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
         }
     }
-    void Update()
-    {
-        
-    }
 
     private void FixedUpdate()
     {
@@ -81,20 +84,21 @@ public class PlayerScript : MonoBehaviour
         Vector2 joystick = _Moure.action.ReadValue<Vector2>();
         _rigidbody2D.linearVelocityX = joystick.x * speed;
         Mover(joystick.x);
-        //_animator.SetFloat("Horizontal", Mathf.Abs(joystick.x));
-        if(_animacioEnPlay.Equals("Idel"))
+        if (!_estaAlTerra)
         {
-            if (joystick.x>0||joystick.x<0)
-            {
-                _animator.Play("Run");
-                _animacioEnPlay="Run";
-            }
-            if (joystick.x == 0)
-            {
-                _animator.Play("Idle");
-                _animacioEnPlay="Idle";
-            }
+            if (_rigidbody2D.linearVelocityY > 0.1f)
+                _animator.Play("Jump");
+            else
+                _animator.Play("Bajada");
         }
+        else if (joystick.x != 0)
+        {
+            _animator.Play("Run");
+        }
+        else
+        {
+            _animator.Play("Idle");
+        } 
     }
 
     private void Mover(float mover)
