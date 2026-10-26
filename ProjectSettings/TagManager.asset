@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Suelo
   - enemic
+  - Escaleras
+  - Plataformas
+  - MuroInvisible
   layers:
   - Default
   - TransparentFX

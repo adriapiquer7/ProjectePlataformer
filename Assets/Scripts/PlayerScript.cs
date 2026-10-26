@@ -35,6 +35,9 @@ public class PlayerScript : MonoBehaviour
         if(collision.gameObject.CompareTag("Suelo"))
         {
             _estaAlTerra = true;
+        }else if (collision.gameObject.CompareTag("Plataformas"))
+        {
+            _estaAlTerra = true;
         }
     }
     void OnCollisionExit2D(Collision2D collision)
