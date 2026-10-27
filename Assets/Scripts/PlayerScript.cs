@@ -14,6 +14,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private float _speed = 4f;
     [SerializeField]
+    private float _jump = 8f;
+    [SerializeField]
     private int municion = 25;
     
     [Header("Moviment basic")]
