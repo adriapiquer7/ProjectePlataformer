@@ -9,7 +9,7 @@ public class SpawnEnemics : MonoBehaviour
     [SerializeField]
     private GameObject _prefab;
 
-    private float _time = Time.time;
+    private float _time = 0;
 
     private void Spawn() {
 

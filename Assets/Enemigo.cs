@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -5,14 +6,14 @@ public class Enemigo : MonoBehaviour
 {
 
     [SerializeField]
-    private float _speed = Random.Range(1.2f,1.8f);
-
-    private float _timeMove = 0;
-
-    private float _timeMoveTMP = Random.Range(2f,6f);
+    private float _speed = 4;
 
     [SerializeField]
     private float _vida;
+
+    private Rigidbody2D _rigidbody2d;
+
+    private int _direccion = 0;
 
     public void HacerDaño(float _daño)
     {
@@ -23,36 +24,30 @@ public class Enemigo : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        _rigidbody2d = GetComponent<Rigidbody2D>();
+    }
+
+    void Start()
+    {
+        SetSpeed(0);
+    }
+
+    public void SetSpeed(int direccion)
+    {
+        _direccion = direccion;
+        _rigidbody2d.linearVelocityX = _speed * direccion;
+
+    }
+
     void Update()
     {
-        direccio();
-        _timeMove += Time.deltaTime;
-        if (_timeMove >= _timeMoveTMP)
-        {
-            direccioNova();
-        }
-    }
-
-    void direccio()
-    {
         
-
-        int opDireccio = (int) Random.Range(1f,3f);
-
-        if(opDireccio == 1)
+        if(_direccion != 0)
         {
-            transform.Translate(Vector2.left*_speed*Time.deltaTime);
-        } else
-        {
-            transform.Translate(Vector2.right*_speed*Time.deltaTime);
+            SetSpeed(_direccion);
         }
-    }
-
-    void direccioNova()
-    {
-        _timeMove -= _timeMoveTMP;
-        _timeMoveTMP = Random.Range(2f,6f);
-        _speed = Random.Range(1.2f,2.2f);
 
     }
 
