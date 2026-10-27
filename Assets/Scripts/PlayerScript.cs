@@ -30,6 +30,9 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private bool _estaAlTerra;
 
+    private int countPowerUpAmmo;
+    private int countPowerUpHealth;
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Suelo"))
@@ -76,7 +79,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.CompareTag("PowerUp"))
         {
-            //StartCoroutine(ApplyPowerUp(other.GetComponent<PowerUpBehaviour>()));
+            StartCoroutine(ApplyPowerUp(other.GetComponent<PowerUpBehaviour>()));
         }
     }
 
@@ -87,35 +90,48 @@ public class PlayerScript : MonoBehaviour
         _rigidbody2D.linearVelocityX = joystick.x * speed;
     }
 
-    //private IEnumerator ApplyPowerUp(PowerUpBehaviour powerUp)
-    //{
-    //    //switch (powerUp.elegirTipoPowerUp())
-    //    //{
-    //    //    case PowerUpBehaviour._powerUpType.Speed:
-    //    //        speed += 2f;
-    //    //        yield return new WaitForSeconds(2f);
-    //    //        speed -= 2f;
-    //    //        break;
-    //    //    case PowerUpBehaviour._powerUpType.Jump:
-    //    //        jump += 2f;
-    //    //        yield return new WaitForSeconds(2f);
-    //    //        jump -= 2f;
-    //    //        break;
-    //    //    case PowerUpBehaviour._powerUpType.Ammo:
+    private IEnumerator ApplyPowerUp(PowerUpBehaviour powerUp)
+    {
+
+        
+        switch (powerUp.elegirTipoPowerUp())
+        {
+            case PowerUpBehaviour._powerUpType.Speed:
+                speed += 2f;
+                yield return new WaitForSeconds(2f);
+                speed -= 2f;
+                break;
+            case PowerUpBehaviour._powerUpType.Jump:
+                jump += 2f;
+                yield return new WaitForSeconds(2f);
+                jump -= 2f;
+                break;
+            case PowerUpBehaviour._powerUpType.Ammo:
+                int municionPrevia = municion;
+                countPowerUpAmmo += 1;
+                if (countPowerUpAmmo != 0)
+                {
+                    municion = 999;
+                    yield return new WaitForSeconds(5f);
+                    countPowerUpAmmo -= 1;
+                }
+                municion = municionPrevia;
+                Debug.Log(countPowerUpAmmo);
+                break;
+            case PowerUpBehaviour._powerUpType.Health:
+                int vidaPrevia = hp;
+                countPowerUpAmmo += 1;
+                if (countPowerUpAmmo != 0)
+                {
+                    hp = 999;
+                    yield return new WaitForSeconds(3f);
+                    countPowerUpAmmo -= 1;
+                }
+                hp = vidaPrevia;
+                break;
                 
-    //    //        int municionPrevia = municion;
-    //    //        municion = 999;
-    //    //        yield return new WaitForSeconds(2f);
-    //    //        municion = municionPrevia;
-    //    //        break;
-    //    //    case PowerUpBehaviour._powerUpType.Health:
-    //    //        int vidaPrevia = hp;
-    //    //        hp = 999;
-    //    //        yield return new WaitForSeconds(2f);
-    //    //        hp = vidaPrevia;
-    //    //        break;
-    //    //}
-    //}
+        }
+    }
 
 
 

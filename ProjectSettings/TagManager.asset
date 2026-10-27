@@ -9,6 +9,7 @@ TagManager:
   - Escaleras
   - Plataformas
   - MuroInvisible
+  - PowerUp
   layers:
   - Default
   - TransparentFX
