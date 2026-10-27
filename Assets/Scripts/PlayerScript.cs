@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,9 +12,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private float _hp=100;
     [SerializeField]
-    private float speed = 4f;
+    private float _speed = 4f;
     [SerializeField]
-    private float jump = 8f;
+    private float _jump = 8f;
     
     [Header("Moviment personalitzat")]
     [SerializeField]
@@ -27,6 +28,8 @@ public class PlayerScript : MonoBehaviour
     [Header("Animacion")]
     private Animator _animator;
 
+    private Coroutine _hitCoroutine;
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         //comprovacions per saber si pot saltar o no
@@ -36,9 +39,27 @@ public class PlayerScript : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("enemic"))
         {
-            _animator.Play("Hit");
+            if(_hitCoroutine is not null)
+                StopCoroutine(_hitCoroutine);
+            _hitCoroutine = StartCoroutine(HitCoroutine());
         }
     }
+
+    private void PlayAnimation(string animation)
+    {
+        if(_hitCoroutine is null)
+            _animator.Play(animation);
+    }
+
+
+    private IEnumerator HitCoroutine()
+    {
+        _animator.Play("Hit");
+        yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        _hitCoroutine = null;
+    }
+
+
     void OnCollisionExit2D(Collision2D collision)
     {
         //comprovacions per saber si pot saltar o no
@@ -73,7 +94,7 @@ public class PlayerScript : MonoBehaviour
         //input per poder saltar
         if (_estaAlTerra)
         {
-            _rigidbody2D.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
+            _rigidbody2D.AddForce(Vector2.up * _jump, ForceMode2D.Impulse);
         }
     }
 
@@ -82,22 +103,22 @@ public class PlayerScript : MonoBehaviour
         //un update que recull el valor del moure del player, cada update es pasa el valor al moure 
         //i gestiona el gir
         Vector2 joystick = _Moure.action.ReadValue<Vector2>();
-        _rigidbody2D.linearVelocityX = joystick.x * speed;
+        _rigidbody2D.linearVelocityX = joystick.x * _speed;
         Mover(joystick.x);
         if (!_estaAlTerra)
         {
             if (_rigidbody2D.linearVelocityY > 0.1f)
-                _animator.Play("Jump");
+                PlayAnimation("Jump");
             else
-                _animator.Play("Bajada");
+                PlayAnimation("Bajada");
         }
         else if (joystick.x != 0)
         {
-            _animator.Play("Run");
+            PlayAnimation("Run");
         }
         else
         {
-            _animator.Play("Idle");
+            PlayAnimation("Idle");
         } 
     }
 
