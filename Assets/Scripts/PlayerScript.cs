@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour
     private float _jump = 8f;
     [SerializeField]
     private int municion = 25;
-    
+
     [Header("Moviment basic")]
     [SerializeField]
     private Transform _player;
@@ -26,8 +26,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private InputActionReference _Jump;
     [SerializeField]
-    private InputActionReference _Moure;  
-
+    private InputActionReference _Moure;
+    [SerializeField]
+    private InputActionReference _disparar;
     private Rigidbody2D _rigidbody2D;
     private bool _estaAlTerra=true;
     private bool _mirandoDerecha = true;
@@ -38,8 +39,12 @@ public class PlayerScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        //comprovacions per saber si pot saltar o no
-        if(collision.gameObject.CompareTag("Suelo"))
+
+        if (collision.gameObject.CompareTag("Suelo"))
+        {
+            _estaAlTerra = true;
+        } 
+        else if (collision.gameObject.CompareTag("Plataformas"))
         {
             _estaAlTerra = true;
         }
@@ -104,6 +109,15 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("PowerUp"))
+        {
+            //StartCoroutine(ApplyPowerUp(other.GetComponent<PowerUpBehaviour>()));
+        }
+    }
+
+
     private void FixedUpdate()
     {
         //un update que recull el valor del moure del player, cada update es pasa el valor al moure 
@@ -148,4 +162,37 @@ public class PlayerScript : MonoBehaviour
         // ho faig servir per poder disparar on estta mirant el player
         transform.eulerAngles = new Vector3(0,transform.eulerAngles.y+180,0);
     }
+
+    //private IEnumerator ApplyPowerUp(PowerUpBehaviour powerUp)
+    //{
+    //    //switch (powerUp.elegirTipoPowerUp())
+    //    //{
+    //    //    case PowerUpBehaviour._powerUpType.Speed:
+    //    //        speed += 2f;
+    //    //        yield return new WaitForSeconds(2f);
+    //    //        speed -= 2f;
+    //    //        break;
+    //    //    case PowerUpBehaviour._powerUpType.Jump:
+    //    //        jump += 2f;
+    //    //        yield return new WaitForSeconds(2f);
+    //    //        jump -= 2f;
+    //    //        break;
+    //    //    case PowerUpBehaviour._powerUpType.Ammo:
+                
+    //    //        int municionPrevia = municion;
+    //    //        municion = 999;
+    //    //        yield return new WaitForSeconds(2f);
+    //    //        municion = municionPrevia;
+    //    //        break;
+    //    //    case PowerUpBehaviour._powerUpType.Health:
+    //    //        int vidaPrevia = hp;
+    //    //        hp = 999;
+    //    //        yield return new WaitForSeconds(2f);
+    //    //        hp = vidaPrevia;
+    //    //        break;
+    //    //}
+    //}
+
+
+
 }
