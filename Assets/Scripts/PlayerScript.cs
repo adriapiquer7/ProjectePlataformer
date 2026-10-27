@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,7 +15,7 @@ public class PlayerScript : MonoBehaviour
     private float jump = 4f;
     [SerializeField]
     private int municion = 25;
-    
+
     [Header("Moviment basic")]
     [SerializeField]
     private Transform _player;
@@ -25,24 +26,23 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private InputActionReference _Moure;
     [SerializeField]
-    private InputActionReference _disparar;   
-
+    private InputActionReference _disparar;
     private Rigidbody2D _rigidbody2D;
     private bool _estaAlTerra;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Suelo"))
+        if (collision.gameObject.CompareTag("Suelo"))
         {
             _estaAlTerra = true;
-        }else if (collision.gameObject.CompareTag("Plataformas"))
+        } else if (collision.gameObject.CompareTag("Plataformas"))
         {
             _estaAlTerra = true;
         }
     }
     void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Suelo"))
+        if (collision.gameObject.CompareTag("Suelo"))
         {
             _estaAlTerra = false;
         }
@@ -72,9 +72,51 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("PowerUp"))
+        {
+            //StartCoroutine(ApplyPowerUp(other.GetComponent<PowerUpBehaviour>()));
+        }
+    }
+
+
     private void FixedUpdate()
     {
         Vector2 joystick = _Moure.action.ReadValue<Vector2>();
         _rigidbody2D.linearVelocityX = joystick.x * speed;
     }
+
+    //private IEnumerator ApplyPowerUp(PowerUpBehaviour powerUp)
+    //{
+    //    //switch (powerUp.elegirTipoPowerUp())
+    //    //{
+    //    //    case PowerUpBehaviour._powerUpType.Speed:
+    //    //        speed += 2f;
+    //    //        yield return new WaitForSeconds(2f);
+    //    //        speed -= 2f;
+    //    //        break;
+    //    //    case PowerUpBehaviour._powerUpType.Jump:
+    //    //        jump += 2f;
+    //    //        yield return new WaitForSeconds(2f);
+    //    //        jump -= 2f;
+    //    //        break;
+    //    //    case PowerUpBehaviour._powerUpType.Ammo:
+                
+    //    //        int municionPrevia = municion;
+    //    //        municion = 999;
+    //    //        yield return new WaitForSeconds(2f);
+    //    //        municion = municionPrevia;
+    //    //        break;
+    //    //    case PowerUpBehaviour._powerUpType.Health:
+    //    //        int vidaPrevia = hp;
+    //    //        hp = 999;
+    //    //        yield return new WaitForSeconds(2f);
+    //    //        hp = vidaPrevia;
+    //    //        break;
+    //    //}
+    //}
+
+
+
 }
