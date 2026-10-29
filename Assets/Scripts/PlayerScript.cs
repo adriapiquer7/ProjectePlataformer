@@ -46,7 +46,7 @@ public class PlayerScript : MonoBehaviour
         {
             _estaAlTerra = true;
         }
-        if (collision.gameObject.CompareTag("enemic") || collision.gameObject.CompareTag("Bala"))
+        if (collision.gameObject.CompareTag("enemic") /*|| collision.gameObject.CompareTag("Bala")*/) //importante añadir la colision de las balas del enemigo
         {
             if(_hitCoroutine is not null)
                 StopCoroutine(_hitCoroutine);
