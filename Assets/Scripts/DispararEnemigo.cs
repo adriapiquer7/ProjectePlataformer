@@ -1,9 +1,14 @@
+using System;
 using UnityEngine;
 
 public class DispararEnemigo : MonoBehaviour
 {
     [SerializeField]
     private Enemigo enemigo;
+    [SerializeField]
+    private GameObject _bala;
+    [SerializeField] 
+    private Transform _controladorDisparo;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,6 +18,7 @@ public class DispararEnemigo : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             enemigo.SetSpeed(0);
+            //Instantiate(_bala, _controladorDisparo.position, _controladorDisparo.rotation);
 
         }
 

@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc06f694001ca964084ec036ba3ce152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DisparoJugador
-  _bala: {fileID: 6747441995750975810, guid: bda85abded4a81a4fa099c9850500d30, type: 3}
+  _bala: {fileID: 3473516222712784360, guid: bda85abded4a81a4fa099c9850500d30, type: 3}
   _controladorDisparo: {fileID: 2133140441}
   _disparo: {fileID: -7471211009204490832, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!114 &106382746
@@ -172,8 +172,10 @@ MonoBehaviour:
   _hp: 100
   _speed: 4
   _jump: 8
+  municion: 25
   _Jump: {fileID: -2099379676528639254, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   _Moure: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _disparar: {fileID: -7471211009204490832, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!50 &106382747
 Rigidbody2D:
   serializedVersion: 5
@@ -922,10 +924,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2064860809}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93f4fd769e3fc754196337541589406a, type: 3}
+  m_Script: {fileID: 11500000, guid: d0517c070815fa14eacd643660d319be, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemic
-  _vida: 100
+  m_EditorClassIdentifier: Assembly-CSharp::Enemigo
+  _speed: 4
+  _vida: 1000
 --- !u!1 &2133140440
 GameObject:
   m_ObjectHideFlags: 0

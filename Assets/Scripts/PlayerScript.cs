@@ -18,10 +18,6 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private int municion = 25;
 
-    [Header("Moviment basic")]
-    [SerializeField]
-    private Transform _player;
-
     [Header("Moviment personalitzat")]
     [SerializeField]
     private InputActionReference _Jump;
@@ -36,6 +32,8 @@ public class PlayerScript : MonoBehaviour
     private Animator _animator;
 
     private Coroutine _hitCoroutine;
+    private Coroutine _deadCoroutine;
+    private bool _IsDead = false;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -48,7 +46,7 @@ public class PlayerScript : MonoBehaviour
         {
             _estaAlTerra = true;
         }
-        if (collision.gameObject.CompareTag("enemic"))
+        if (collision.gameObject.CompareTag("enemic") || collision.gameObject.CompareTag("Bala"))
         {
             if(_hitCoroutine is not null)
                 StopCoroutine(_hitCoroutine);
@@ -58,6 +56,9 @@ public class PlayerScript : MonoBehaviour
 
     private void PlayAnimation(string animation)
     {
+        if(_IsDead)
+        return;
+
         if(_hitCoroutine is null)
             _animator.Play(animation);
     }
@@ -120,6 +121,8 @@ public class PlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(_IsDead)
+        return;
         //un update que recull el valor del moure del player, cada update es pasa el valor al moure 
         //i gestiona el gir
         Vector2 joystick = _Moure.action.ReadValue<Vector2>();
@@ -161,6 +164,28 @@ public class PlayerScript : MonoBehaviour
         //aixo ho he tret d'un video de youtube, gira el player i els seus components.
         // ho faig servir per poder disparar on estta mirant el player
         transform.eulerAngles = new Vector3(0,transform.eulerAngles.y+180,0);
+    }
+    public void HacerDaño(float _daño)
+    {
+        if(_IsDead)
+        return;
+
+        _hp-=_daño;
+        if(_hp<=0)
+        {
+            _IsDead = true;
+            if(_hitCoroutine is not null)
+                StopCoroutine(_hitCoroutine);
+            _deadCoroutine = StartCoroutine(DeadCoroutine());
+        }
+    }
+    private IEnumerator DeadCoroutine()
+    {
+        _rigidbody2D.linearVelocity=Vector2.zero;
+        _rigidbody2D.simulated=false;
+        _animator.Play("Dead");
+        yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        Destroy(gameObject);
     }
 
     //private IEnumerator ApplyPowerUp(PowerUpBehaviour powerUp)
