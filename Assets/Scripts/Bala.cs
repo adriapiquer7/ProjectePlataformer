@@ -22,14 +22,6 @@ public class Bala : MonoBehaviour
             other.gameObject.GetComponent<Enemigo>().HacerDaño(_dany);
             Destroy(gameObject);
         }
-        if (other.gameObject.CompareTag("Player"))
-        {
-            other.gameObject.GetComponent<PlayerScript>().HacerDaño(_dany);
-        }
-        if (other.CompareTag("Suelo") || other.CompareTag("Escaleras") || other.CompareTag("Props"))
-        {
-            Destroy(gameObject);
-        }
     }
     void OnBecameInvisible()
     {
