@@ -29,23 +29,21 @@ public class PlayerScript : MonoBehaviour
     private InputActionReference _disparar;
     private Rigidbody2D _rigidbody2D;
     private bool _estaAlTerra;
-
+    private bool _estaEnEscalera;
     private int countPowerUpAmmo;
     private int countPowerUpHealth;
+    private float _gravedadOriginal;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Suelo"))
-        {
-            _estaAlTerra = true;
-        } else if (collision.gameObject.CompareTag("Plataformas"))
+        if (collision.gameObject.CompareTag("Suelo") || collision.gameObject.CompareTag("Plataformes"))
         {
             _estaAlTerra = true;
         }
     }
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Suelo"))
+        if (collision.gameObject.CompareTag("Suelo") || collision.gameObject.CompareTag("Plataformes"))
         {
             _estaAlTerra = false;
         }
@@ -54,6 +52,7 @@ public class PlayerScript : MonoBehaviour
     void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _gravedadOriginal = _rigidbody2D.gravityScale;
     }
 
     void OnEnable()
@@ -81,8 +80,19 @@ public class PlayerScript : MonoBehaviour
         {
             StartCoroutine(ApplyPowerUp(other.GetComponent<PowerUpBehaviour>()));
         }
-    }
+        if (other.CompareTag("Escaleras"))
+        {
+            desactivarGravedad();
 
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Escaleras"))
+        {
+            activarGravedad();
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -90,24 +100,36 @@ public class PlayerScript : MonoBehaviour
         _rigidbody2D.linearVelocityX = joystick.x * speed;
     }
 
+
+    private void desactivarGravedad()
+    {
+        _rigidbody2D.gravityScale = 0f;
+        //FRENAR CUALQUIER CAIDA O MOMENTUM
+        _rigidbody2D.linearVelocity = Vector2.zero;
+    }
+    private void activarGravedad()
+    {
+        _rigidbody2D.gravityScale = _gravedadOriginal;
+    }
     private IEnumerator ApplyPowerUp(PowerUpBehaviour powerUp)
     {
-
-        
         switch (powerUp.elegirTipoPowerUp())
         {
             case PowerUpBehaviour._powerUpType.Speed:
                 speed += 2f;
+                powerUp.ReproducirSonido(PowerUpBehaviour._powerUpType.Speed);
                 yield return new WaitForSeconds(2f);
                 speed -= 2f;
                 break;
             case PowerUpBehaviour._powerUpType.Jump:
                 jump += 2f;
+                powerUp.ReproducirSonido(PowerUpBehaviour._powerUpType.Jump);
                 yield return new WaitForSeconds(2f);
                 jump -= 2f;
                 break;
             case PowerUpBehaviour._powerUpType.Ammo:
                 int municionPrevia = municion;
+                powerUp.ReproducirSonido(PowerUpBehaviour._powerUpType.Ammo);
                 countPowerUpAmmo += 1;
                 if (countPowerUpAmmo != 0)
                 {
@@ -120,6 +142,7 @@ public class PlayerScript : MonoBehaviour
                 break;
             case PowerUpBehaviour._powerUpType.Health:
                 int vidaPrevia = hp;
+                powerUp.ReproducirSonido(PowerUpBehaviour._powerUpType.Health);
                 countPowerUpAmmo += 1;
                 if (countPowerUpAmmo != 0)
                 {
