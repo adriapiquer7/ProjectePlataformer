@@ -144,6 +144,6 @@ MonoBehaviour:
   amplitud: 0.1
   velocidad: 0.5
   sonidoSpeed: {fileID: 0}
-  sonidoJump: {fileID: 0}
+  sonidoJump: {fileID: 8300000, guid: 954404577099bde4b89b2f7a6ea5208f, type: 3}
   sonidoAmmo: {fileID: 8300000, guid: 774c4a9d078ea0e43b1189c997320350, type: 3}
   sonidoHealth: {fileID: 0}

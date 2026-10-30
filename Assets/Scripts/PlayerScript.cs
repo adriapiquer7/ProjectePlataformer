@@ -110,7 +110,7 @@ public class PlayerScript : MonoBehaviour
     private void Saltar(InputAction.CallbackContext context)
     {
         //input per poder saltar
-        if (_estaAlTerra)
+        if (_estaAlTerra || _estaEnEscalera)
         {
             _rigidbody2D.AddForce(Vector2.up * _jump, ForceMode2D.Impulse);
         }
@@ -121,9 +121,11 @@ public class PlayerScript : MonoBehaviour
         if (other.CompareTag("PowerUp"))
         {
             StartCoroutine(ApplyPowerUp(other.GetComponent<PowerUpBehaviour>()));
+            Destroy(other.gameObject);
         }
         if (other.CompareTag("Escaleras"))
         {
+            _estaEnEscalera = true;
             desactivarGravedad();
 
         }
@@ -132,6 +134,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.CompareTag("Escaleras"))
         {
+            _estaEnEscalera = false;
             activarGravedad();
         }
     }
