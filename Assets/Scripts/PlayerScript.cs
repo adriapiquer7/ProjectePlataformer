@@ -16,7 +16,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private float _jump = 8f;
     [SerializeField]
-    private int municion = 25;
+    private int _municion = 25;
 
     [Header("Moviment personalitzat")]
     [SerializeField]
@@ -26,12 +26,11 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private InputActionReference _disparar;
     private Rigidbody2D _rigidbody2D;
-    private bool _estaAlTerra;
+    private bool _estaAlTerra = true;
     private bool _estaEnEscalera;
     private int countPowerUpAmmo;
     private int countPowerUpHealth;
     private float _gravedadOriginal;
-    private bool _estaAlTerra=true;
     private bool _mirandoDerecha = true;
 
     [Header("Animacion")]
@@ -222,41 +221,41 @@ public class PlayerScript : MonoBehaviour
         switch (powerUp.elegirTipoPowerUp())
         {
             case PowerUpBehaviour._powerUpType.Speed:
-                speed += 2f;
+                _speed += 2f;
                 powerUp.ReproducirSonido(PowerUpBehaviour._powerUpType.Speed);
                 yield return new WaitForSeconds(2f);
-                speed -= 2f;
+                _speed -= 2f;
                 break;
             case PowerUpBehaviour._powerUpType.Jump:
-                jump += 2f;
+                _jump += 2f;
                 powerUp.ReproducirSonido(PowerUpBehaviour._powerUpType.Jump);
                 yield return new WaitForSeconds(2f);
-                jump -= 2f;
+                _jump -= 2f;
                 break;
             case PowerUpBehaviour._powerUpType.Ammo:
-                int municionPrevia = municion;
+                int municionPrevia = _municion;
                 powerUp.ReproducirSonido(PowerUpBehaviour._powerUpType.Ammo);
                 countPowerUpAmmo += 1;
                 if (countPowerUpAmmo != 0)
                 {
-                    municion = 999;
+                    _municion = 999;
                     yield return new WaitForSeconds(5f);
                     countPowerUpAmmo -= 1;
                 }
-                municion = municionPrevia;
+                _municion = municionPrevia;
                 Debug.Log(countPowerUpAmmo);
                 break;
             case PowerUpBehaviour._powerUpType.Health:
-                int vidaPrevia = hp;
+                float vidaPrevia = _hp;
                 powerUp.ReproducirSonido(PowerUpBehaviour._powerUpType.Health);
                 countPowerUpAmmo += 1;
                 if (countPowerUpAmmo != 0)
                 {
-                    hp = 999;
+                    _hp = 999;
                     yield return new WaitForSeconds(3f);
                     countPowerUpAmmo -= 1;
                 }
-                hp = vidaPrevia;
+                _hp = vidaPrevia;
                 break;
                 
         }
