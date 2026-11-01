@@ -60617,7 +60617,7 @@ MonoBehaviour:
   _prefab: {fileID: 4379434642364336406, guid: db55194263eb17542a24788992b3745d, type: 3}
   _rangPositiuX: 5
   _rangNegatiuX: 4
-  _maximEnemics: 10
+  _maximEnemics: 1
 --- !u!4 &1250928779
 Transform:
   m_ObjectHideFlags: 0
@@ -61125,7 +61125,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 110.77, y: 15.91, z: 0}
-  m_LocalPosition: {x: 113.62, y: 33.26, z: 0}
   m_LocalScale: {x: 4.5, y: 4.5, z: 4.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -61639,8 +61638,8 @@ MonoBehaviour:
   _tempsEntreSpawn: 3
   _transformSpawn: {fileID: 2142555328}
   _prefab: {fileID: 712732219262296568, guid: 7fe24ea495c1a9b46ae530f3bcfae7fd, type: 3}
-  _rangPositiuX: 2
-  _rangNegatiuX: 2
+  _rangPositiuX: 5
+  _rangNegatiuX: 5
   _maximEnemics: 10
 --- !u!4 &2142555328
 Transform:
@@ -61651,7 +61650,7 @@ Transform:
   m_GameObject: {fileID: 2142555325}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.9, y: -5.2, z: 0}
+  m_LocalPosition: {x: 29.9, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
