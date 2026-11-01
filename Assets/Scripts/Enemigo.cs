@@ -27,6 +27,18 @@ public class Enemigo : MonoBehaviour
 
     private SpawnEnemics _spawner;
 
+    //Para saber si es el jefe y mostrar texto al matar
+
+    [SerializeField]
+    private Boolean boss = false;
+
+    [SerializeField]
+    private GameObject _textGanar;
+
+    // Puntuacion al eliminar
+
+    private ManagerUI _missatjeContador;
+
     void Awake()
     {
         _rigidbody2d = GetComponent<Rigidbody2D>();
@@ -90,6 +102,18 @@ public class Enemigo : MonoBehaviour
             if (_hitCoroutine is not null)
                 StopCoroutine(_hitCoroutine);
             StartCoroutine(DeadCoroutine());
+
+            if (boss)
+            {
+                _textGanar.SetActive(true);
+                //Time.timeScale = 0;
+            } else
+            {
+                
+                _missatjeContador.AddPuntos(1);
+
+            }
+
         }
         else
         {

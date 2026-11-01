@@ -36,6 +36,11 @@ public class PlayerScript : MonoBehaviour
     private Coroutine _deadCoroutine;
     private bool _IsDead = false;
 
+    // Mostrar al eliminar Player
+
+    [SerializeField]
+    private GameObject _textElimiarPlayer;
+
     void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -200,6 +205,10 @@ public class PlayerScript : MonoBehaviour
             if(_hitCoroutine is not null)
                 StopCoroutine(_hitCoroutine);
             _deadCoroutine = StartCoroutine(DeadCoroutine());
+
+            _textElimiarPlayer.SetActive(true);
+            //Time.timeScale = 0;
+
         }
     }
     private IEnumerator DeadCoroutine()

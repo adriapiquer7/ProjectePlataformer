@@ -33,6 +33,7 @@ public class ManagerUI : MonoBehaviour
 
     private void ActualizarTexto()
     {
+        puntuacion++;
         scoreText.text = "Puntos: " + puntuacion;
     }
     

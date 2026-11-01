@@ -182,14 +182,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84ec60eb4d3258b44ae70ab437009413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScript
-  _hp_max: 100
   _hp: 100
   _speed: 4
   _jump: 8
   _municion: 25
   _Jump: {fileID: -2099379676528639254, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   _Moure: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  _disparar: {fileID: -7471211009204490832, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!114 &5687979839761052766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +203,7 @@ MonoBehaviour:
   _bala: {fileID: 3473516222712784360, guid: bda85abded4a81a4fa099c9850500d30, type: 3}
   _controladorDisparo: {fileID: 3955752942416869721}
   _disparo: {fileID: -7471211009204490832, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  _player: {fileID: 2456389292271875660}
 --- !u!95 &4197405452800638295
 Animator:
   serializedVersion: 7

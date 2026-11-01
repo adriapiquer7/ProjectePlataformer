@@ -184,6 +184,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemigo
   _speed: 4
   _vida: 100
+  boss: 0
+  _textGanar: {fileID: 4111520724869101776, guid: 207535f5e327078489776337bf935181, type: 3}
 --- !u!95 &-1993286512806739628
 Animator:
   serializedVersion: 7
