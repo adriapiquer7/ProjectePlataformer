@@ -39,6 +39,7 @@ public class Enemigo : MonoBehaviour
 
     private ManagerUI _missatjeContador;
 
+
     void Awake()
     {
         _rigidbody2d = GetComponent<Rigidbody2D>();
@@ -106,10 +107,9 @@ public class Enemigo : MonoBehaviour
             if (boss)
             {
                 _textGanar.SetActive(true);
-                //Time.timeScale = 0;
+                Time.timeScale = 0;
             } else
             {
-                
                 _missatjeContador.AddPuntos(1);
 
             }
