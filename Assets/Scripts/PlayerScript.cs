@@ -233,7 +233,7 @@ public class PlayerScript : MonoBehaviour
     }
     private IEnumerator ApplyPowerUp(PowerUpBehaviour powerUp)
     {
-        switch (powerUp.elegirTipoPowerUp())
+        switch (powerUp.TipoPowerUp())
         {
             case PowerUpBehaviour._powerUpType.Speed:
                 _speed += 2f;
