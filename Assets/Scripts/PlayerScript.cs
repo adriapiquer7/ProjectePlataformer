@@ -21,7 +21,6 @@ public class PlayerScript : MonoBehaviour
     private InputActionReference _Jump;
     [SerializeField]
     private InputActionReference _Moure;
-    [SerializeField]
     private Rigidbody2D _rigidbody2D;
     private bool _estaAlTerra = true;
     private bool _estaEnEscalera;
