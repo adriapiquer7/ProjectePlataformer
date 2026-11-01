@@ -9,6 +9,8 @@ public class DisparoJugador : MonoBehaviour
     private Transform _controladorDisparo;
     [SerializeField] 
     private InputActionReference _disparo;
+    [SerializeField]
+    private PlayerScript _player;
 
     /*
     Aquest script serveix per gestionar els dispars del jugador, recull l'input del boto per disparar,
@@ -26,8 +28,14 @@ public class DisparoJugador : MonoBehaviour
 
     private void Disparar(InputAction.CallbackContext context)
     {
+        if (!_player.IntentarGastarMunicio())
+        {
+            return;
 
-        Instantiate(_bala, _controladorDisparo.position, _controladorDisparo.rotation);
-
+        }
+        else
+        {
+            Instantiate(_bala, _controladorDisparo.position, _controladorDisparo.rotation);
+        }      
     }
 }

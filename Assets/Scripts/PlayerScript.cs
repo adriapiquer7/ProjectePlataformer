@@ -8,15 +8,13 @@ public class PlayerScript : MonoBehaviour
 {
     [Header("Stats Player")]
     [SerializeField]
-    private float _hp_max = 100;
-    [SerializeField]
     private float _hp=100;
     [SerializeField]
     private float _speed = 4f;
     [SerializeField]
     private float _jump = 8f;
     [SerializeField]
-    private int _municion = 25;
+    private int _municion = 40;
 
     [Header("Moviment personalitzat")]
     [SerializeField]
@@ -24,7 +22,6 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private InputActionReference _Moure;
     [SerializeField]
-    private InputActionReference _disparar;
     private Rigidbody2D _rigidbody2D;
     private bool _estaAlTerra = true;
     private bool _estaEnEscalera;
@@ -51,7 +48,7 @@ public class PlayerScript : MonoBehaviour
         {
             _estaAlTerra = true;
         }
-        if (collision.gameObject.CompareTag("enemic") /*|| collision.gameObject.CompareTag("Bala")*/) //importante añadir la colision de las balas del enemigo
+        if (collision.gameObject.CompareTag("enemic") || collision.gameObject.CompareTag("BalaEnemic"))
         {
             if(_hitCoroutine is not null)
                 StopCoroutine(_hitCoroutine);
@@ -105,7 +102,14 @@ public class PlayerScript : MonoBehaviour
         //desubscripcio del jump
         _Jump.action.performed -= Saltar;
     }
+    public bool IntentarGastarMunicio()
+    {
+        if (_municion <= 0)
+            return false;
 
+        _municion--;
+        return true;
+    }
 
     private void Saltar(InputAction.CallbackContext context)
     {
@@ -226,13 +230,13 @@ public class PlayerScript : MonoBehaviour
             case PowerUpBehaviour._powerUpType.Speed:
                 _speed += 2f;
                 powerUp.ReproducirSonido(PowerUpBehaviour._powerUpType.Speed);
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(5f);
                 _speed -= 2f;
                 break;
             case PowerUpBehaviour._powerUpType.Jump:
                 _jump += 2f;
                 powerUp.ReproducirSonido(PowerUpBehaviour._powerUpType.Jump);
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(5f);
                 _jump -= 2f;
                 break;
             case PowerUpBehaviour._powerUpType.Ammo:
@@ -242,7 +246,7 @@ public class PlayerScript : MonoBehaviour
                 if (countPowerUpAmmo != 0)
                 {
                     _municion = 999;
-                    yield return new WaitForSeconds(5f);
+                    yield return new WaitForSeconds(30f);
                     countPowerUpAmmo -= 1;
                 }
                 _municion = municionPrevia;
@@ -255,7 +259,7 @@ public class PlayerScript : MonoBehaviour
                 if (countPowerUpAmmo != 0)
                 {
                     _hp = 999;
-                    yield return new WaitForSeconds(3f);
+                    yield return new WaitForSeconds(10f);
                     countPowerUpAmmo -= 1;
                 }
                 _hp = vidaPrevia;
@@ -263,7 +267,4 @@ public class PlayerScript : MonoBehaviour
                 
         }
     }
-
-
-
 }

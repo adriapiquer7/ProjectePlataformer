@@ -123,7 +123,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &-6592586570443399563
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -233,7 +233,7 @@ Transform:
   m_GameObject: {fileID: 6492015330719493933}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0908, y: -0.098, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -315,7 +315,7 @@ Transform:
   m_GameObject: {fileID: 9165603195731686658}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0913, y: -0.098, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -334,8 +334,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DispararEnemigo
   enemigo: {fileID: -4827061241429578143}
-  _bala: {fileID: 3473516222712784360, guid: bda85abded4a81a4fa099c9850500d30, type: 3}
+  _bala: {fileID: 3473516222712784360, guid: 4e0178b2b4f7d91479894e13d75d9d57, type: 3}
   _controladorDisparo: {fileID: 4924337193774092514}
+  _tiempoEntreDisparos: 1
 --- !u!58 &6112198172498408039
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ TagManager:
   - MuroInvisible
   - PowerUp
   - Props
+  - BalaEnemic
   layers:
   - Default
   - TransparentFX

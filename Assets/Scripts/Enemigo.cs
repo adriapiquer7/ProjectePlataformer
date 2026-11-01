@@ -85,7 +85,8 @@ public class Enemigo : MonoBehaviour
         if (_vida <= 0)
         {
             _IsDead = true;
-            _spawner.EnemigoEliminado();
+            if (_spawner != null)
+                _spawner.EnemigoEliminado();
             if (_hitCoroutine is not null)
                 StopCoroutine(_hitCoroutine);
             StartCoroutine(DeadCoroutine());

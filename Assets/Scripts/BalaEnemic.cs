@@ -17,6 +17,7 @@ public class BalaEnemic : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerScript>().HacerDaño(_dany);
+            Destroy(gameObject);
         }
     }
     void OnBecameInvisible()

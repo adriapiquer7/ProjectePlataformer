@@ -23,17 +23,18 @@ public class SpawnEnemics : MonoBehaviour
 
     private int _cantEnemics = 0;
 
-    private void Spawn() {
+    private void Spawn()
+    {
+        if (_prefab.CompareTag("Boss"))
+            _maximEnemics = 1;
 
         _cantEnemics++;
-        Debug.Log("Cantidad de enemics: " + _cantEnemics);
-
-
         _time -= _tempsEntreSpawn;
-        GameObject EnemicInstanciat = Instantiate(_prefab);
-        EnemicInstanciat.transform.position = new Vector3(Random.Range(_transformSpawn.position.x-_rangNegatiuX, _transformSpawn.position.x+_rangPositiuX),transform.position.y,0);
 
-    }
+        GameObject enemicInstanciat = Instantiate(_prefab);
+        enemicInstanciat.transform.position = new Vector3(Random.Range(_transformSpawn.position.x - _rangNegatiuX, _transformSpawn.position.x + _rangPositiuX),transform.position.y,0);
+        enemicInstanciat.GetComponent<Enemigo>().SetSpawner(this);
+}
 
     public void EnemigoEliminado()
     {
