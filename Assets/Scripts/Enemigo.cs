@@ -25,6 +25,8 @@ public class Enemigo : MonoBehaviour
     private Coroutine _hitCoroutine;
     private bool _IsDead = false;
 
+    private SpawnEnemics _spawner;
+
     void Awake()
     {
         _rigidbody2d = GetComponent<Rigidbody2D>();
@@ -83,6 +85,7 @@ public class Enemigo : MonoBehaviour
         if (_vida <= 0)
         {
             _IsDead = true;
+            _spawner.EnemigoEliminado();
             if (_hitCoroutine is not null)
                 StopCoroutine(_hitCoroutine);
             StartCoroutine(DeadCoroutine());
@@ -109,4 +112,11 @@ public class Enemigo : MonoBehaviour
         yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
         Destroy(gameObject);
     }
+
+    public void SetSpawner(SpawnEnemics spawner)
+    {
+        _spawner = spawner;
+    }
+
+
 }

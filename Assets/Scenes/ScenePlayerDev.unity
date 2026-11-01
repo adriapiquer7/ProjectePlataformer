@@ -13731,7 +13731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &399380575
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13795,6 +13795,7 @@ MonoBehaviour:
   _prefab: {fileID: 712732219262296568, guid: 7fe24ea495c1a9b46ae530f3bcfae7fd, type: 3}
   _rangPositiuX: 0
   _rangNegatiuX: 0
+  _maximEnemics: 10
 --- !u!4 &399380577
 Transform:
   m_ObjectHideFlags: 0
@@ -13997,6 +13998,7 @@ MonoBehaviour:
   _prefab: {fileID: 4379434642364336406, guid: db55194263eb17542a24788992b3745d, type: 3}
   _rangPositiuX: 5
   _rangNegatiuX: 4
+  _maximEnemics: 1
 --- !u!4 &528971276
 Transform:
   m_ObjectHideFlags: 0
@@ -14967,6 +14969,7 @@ MonoBehaviour:
   _prefab: {fileID: 712732219262296568, guid: 7fe24ea495c1a9b46ae530f3bcfae7fd, type: 3}
   _rangPositiuX: 2
   _rangNegatiuX: 2
+  _maximEnemics: 10
 --- !u!4 &1355385865
 Transform:
   m_ObjectHideFlags: 0

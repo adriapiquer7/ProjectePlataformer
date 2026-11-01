@@ -370,5 +370,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DispararEnemigo
   enemigo: {fileID: -1793586747259325716}
-  _bala: {fileID: 3473516222712784360, guid: bda85abded4a81a4fa099c9850500d30, type: 3}
+  _bala: {fileID: 3473516222712784360, guid: 4e0178b2b4f7d91479894e13d75d9d57, type: 3}
   _controladorDisparo: {fileID: 6733725976304183527}
+  _tiempoEntreDisparos: 1

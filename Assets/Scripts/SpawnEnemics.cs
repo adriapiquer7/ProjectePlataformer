@@ -18,11 +18,26 @@ public class SpawnEnemics : MonoBehaviour
     private float _time = 0;
     private bool _actiu = false;
 
+    [SerializeField]
+    private int _maximEnemics = 10;
+
+    private int _cantEnemics = 0;
+
     private void Spawn() {
+
+        _cantEnemics++;
+        Debug.Log("Cantidad de enemics: " + _cantEnemics);
+
+
         _time -= _tempsEntreSpawn;
         GameObject EnemicInstanciat = Instantiate(_prefab);
         EnemicInstanciat.transform.position = new Vector3(Random.Range(_transformSpawn.position.x-_rangNegatiuX, _transformSpawn.position.x+_rangPositiuX),transform.position.y,0);
 
+    }
+
+    public void EnemigoEliminado()
+    {
+        _cantEnemics--;
     }
 
     void Update()
@@ -31,7 +46,7 @@ public class SpawnEnemics : MonoBehaviour
         return;
 
         _time += Time.deltaTime;
-        if(_time > _tempsEntreSpawn)
+        if(_time > _tempsEntreSpawn && _cantEnemics < _maximEnemics)
         {
             _time=0;
             Spawn();
