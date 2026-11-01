@@ -8,8 +8,6 @@ public class PlayerScript : MonoBehaviour
 {
     [Header("Stats Player")]
     [SerializeField]
-    private float _hp_max = 100;
-    [SerializeField]
     private float _hp=100;
     [SerializeField]
     private float _speed = 4f;
@@ -263,7 +261,10 @@ public class PlayerScript : MonoBehaviour
                 
         }
     }
-
+    public void morir()
+    {
+        HacerDaño(_hp);
+    }
 
 
 }

@@ -9,6 +9,7 @@ public class PowerUpBehaviour : MonoBehaviour
 
 
     [Header("Sonidos")]
+    [SerializeField] private float volumenSonido = 3f;
     [SerializeField] private AudioClip sonidoSpeed;
     [SerializeField] private AudioClip sonidoJump;
     [SerializeField] private AudioClip sonidoAmmo;
@@ -63,7 +64,7 @@ public class PowerUpBehaviour : MonoBehaviour
         }
 
         if (clip != null)
-            AudioSource.PlayClipAtPoint(clip, transform.position);
+            AudioSource.PlayClipAtPoint(clip, transform.position, volumenSonido);
     }
 
 

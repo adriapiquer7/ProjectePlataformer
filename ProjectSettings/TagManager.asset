@@ -12,6 +12,7 @@ TagManager:
   - MuroInvisible
   - PowerUp
   - Props
+  - Boss
   layers:
   - Default
   - TransparentFX

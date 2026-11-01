@@ -109,6 +109,7 @@ public class Enemigo : MonoBehaviour
         _rigidbody2d.linearVelocity = Vector2.zero;
         _rigidbody2d.simulated = false;
         _animator.Play("Dead");
+        ManagerUI.Instance.AddPuntos(100);
         yield return new WaitForSeconds(_animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
         Destroy(gameObject);
     }

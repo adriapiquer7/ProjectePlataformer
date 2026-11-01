@@ -123,7 +123,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &-6592586570443399563
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -336,6 +336,7 @@ MonoBehaviour:
   enemigo: {fileID: -4827061241429578143}
   _bala: {fileID: 3473516222712784360, guid: bda85abded4a81a4fa099c9850500d30, type: 3}
   _controladorDisparo: {fileID: 4924337193774092514}
+  _tiempoEntreDisparos: 1
 --- !u!58 &6112198172498408039
 CircleCollider2D:
   m_ObjectHideFlags: 0
