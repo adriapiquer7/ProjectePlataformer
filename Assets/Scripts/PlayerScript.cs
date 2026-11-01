@@ -267,4 +267,8 @@ public class PlayerScript : MonoBehaviour
                 
         }
     }
+    public void morir()
+    {
+        HacerDaño(_hp);
+    }
 }

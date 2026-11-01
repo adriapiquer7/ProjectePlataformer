@@ -143,7 +143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   amplitud: 0.1
   velocidad: 0.5
-  sonidoSpeed: {fileID: 0}
+  volumenSonido: 1
+  sonidoSpeed: {fileID: 8300000, guid: 0eede79a0585d9a47b6197d7fe944e9a, type: 3}
   sonidoJump: {fileID: 8300000, guid: 954404577099bde4b89b2f7a6ea5208f, type: 3}
   sonidoAmmo: {fileID: 8300000, guid: 774c4a9d078ea0e43b1189c997320350, type: 3}
-  sonidoHealth: {fileID: 0}
+  sonidoHealth: {fileID: 8300000, guid: 0301c204408a4e6429310f6402c8082f, type: 3}
